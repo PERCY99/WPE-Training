@@ -4,13 +4,13 @@ function Form() {
     const [name, setName] = useState("");
     const [pass, setPass] = useState("")
     
-    const handleChange = (e) =>{
+    const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(name , pass);
     }
     return (
         <div>
-            <form onSubmit={handleChange}>
+            <form onSubmit={handleSubmit}>
                 <label>Name
                     <input 
                         type="text" 
