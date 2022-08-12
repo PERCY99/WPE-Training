@@ -12,6 +12,8 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+var _ = require('lodash');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -39,6 +41,20 @@ app.get("/contact", (req, res) => {
 app.get("/compose", (req, res) => {
   res.render("compose");
 
+});
+
+app.get("/posts/:postName" , (res , req)=> {
+  const requestTitle = _.lowerCase(req.params.postName);
+
+  posts.forEach((post) => {
+    const storedTitle = _.lowerCase(post.title);
+    if(requestTitle === storedTitle){
+      res.render("post" , {
+        title : post.title,
+        post : post.post
+      })
+    }
+  })  
 });
 
 app.post("/compose", (req, res) => {
